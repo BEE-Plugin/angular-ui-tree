@@ -130,12 +130,7 @@
             scope.$element.after(placeElm);
             scope.$element.after(hiddenPlaceElm);
             dragElm.append(scope.$element);
-
-            var dragElmBound = 'body';
-            if (scope.boundTo.length > 0) {
-              dragElmBound = scope.boundTo;
-            }
-            $document.find(dragElmBound).append(dragElm);
+            $document.find('body').append(dragElm);
             dragElm.css({
               'left': eventObj.pageX - pos.offsetX + 'px',
               'top': eventObj.pageY - pos.offsetY + 'px'
