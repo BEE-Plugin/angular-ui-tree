@@ -1,5 +1,5 @@
 {
-  "name": "angularuitree",
+  "name": "angular-ui-tree",
   "version": "2.1.5",
   "dependencies": {
     "grunt": "~0.4.2",
