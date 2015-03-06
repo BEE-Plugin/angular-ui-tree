@@ -136,7 +136,6 @@
               dragElmBound = scope.boundTo;
             }
             $document.find(dragElmBound).append(dragElm);
-
             dragElm.css({
               'left': eventObj.pageX - pos.offsetX + 'px',
               'top': eventObj.pageY - pos.offsetY + 'px'

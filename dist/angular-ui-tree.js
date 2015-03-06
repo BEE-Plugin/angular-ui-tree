@@ -947,7 +947,7 @@
             dragElm.css('z-index', 9999);
 
             // Prevents cursor to change rapidly in Opera 12.16 and IE when dragging an element
-            var hStyle = (scope.$element[0].querySelector('.angular-ui-tree-handle') || scope.$element[0]).currentStyle;
+            var hStyle = (scope.$element[0].querySelector('.' + config.handleClass) || scope.$element[0]).currentStyle;
             if (hStyle) {
               document.body.setAttribute('ui-tree-cursor', $document.find('body').css('cursor') || '');
               $document.find('body').css({
@@ -958,7 +958,12 @@
             scope.$element.after(placeElm);
             scope.$element.after(hiddenPlaceElm);
             dragElm.append(scope.$element);
-            $document.find('body').append(dragElm);
+
+            var dragElmBound = 'body';
+            if (scope.boundTo.length > 0) {
+              dragElmBound = scope.boundTo;
+            }
+            $document.find(dragElmBound).append(dragElm);
             dragElm.css({
               'left': eventObj.pageX - pos.offsetX + 'px',
               'top': eventObj.pageY - pos.offsetY + 'px'
@@ -1016,7 +1021,7 @@
               }
 
               //dragElm can't leave the screen on the bottom
-              var handleElement = scope.$element.find('.angular-ui-tree-handle');
+              var handleElement = scope.$element.find('.' + config.handleClass);
               var handleHeight = (handleElement) ? handleElement.height() : 10;
 
               //dragElm can't leave the screen or the bounding parent on the bottom
