@@ -1,5 +1,5 @@
 {
-  "name": "Angular-NestedSortable",
+  "name": "angularuitree",
   "version": "2.1.5",
   "dependencies": {
     "grunt": "~0.4.2",
@@ -36,5 +36,6 @@
   },
   "engines": {
     "node": ">=0.8.0"
-  }
+  },
+  "main": "dist/angular-ui-tree.js"
 }
