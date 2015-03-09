@@ -156,6 +156,7 @@
 
             var eventObj = $uiTreeHelper.eventObj(e);
             var prev, leftElmPos, originLeftElmPos, topElmPos, originTopElmPos;
+            var scrollTopBoundTo = '';
 
             if (dragElm) {
               e.preventDefault();
@@ -169,13 +170,21 @@
               leftElmPos = eventObj.pageX - pos.offsetX;
               topElmPos = eventObj.pageY - pos.offsetY;
 
+              //dragElm can't leave the screen or the bounding parent on the left
+              if (((!scope.boundTo || scope.boundTo.length === 0) && leftElmPos < 0) || (scope.boundTo && leftElmPos < scope.boundTo.position().left)) {
+                leftElmPos = (!scope.boundTo || scope.boundTo.length === 0) ? 0 : scope.boundTo.position().left;
+              }
+
               //dragElm can't leave the screen or the bounding parent on the top
               if (((!scope.boundTo || scope.boundTo.length === 0) && topElmPos < 0) || (scope.boundTo && topElmPos < scope.boundTo.position().top)) {
                 topElmPos = (!scope.boundTo || scope.boundTo.length === 0) ? 0 : scope.boundTo.position().top;
 
-                $(scope.boundTo).animate({
-                  scrollTop: '-=100'
-                }, 100);
+                scrollTopBoundTo = $(scope.boundTo).scrollTop();
+                if (scrollTopBoundTo > 100) {
+                  $(scope.boundTo).animate({
+                    scrollTop: '-=100'
+                  }, 100);
+                }
               }
 
               //dragElm can't leave the screen on the bottom
@@ -189,12 +198,12 @@
                   (scope.boundTo.position().top + scope.boundTo.height()))) {
 
                 topElmPos = (!scope.boundTo || scope.boundTo.length === 0) ? (document_height - handleHeight) : ((scope.boundTo.position().top + scope.boundTo.height()) - handleHeight);
+                scrollTopBoundTo = $(scope.boundTo).scrollTop();
 
                 $(scope.boundTo).animate({
                   scrollTop: '+=100'
                 }, 100);
               }
-
 
               //dragElm can't leave the screen on the right
               if (((!scope.boundTo || scope.boundTo.length === 0) &&
