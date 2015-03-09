@@ -82,7 +82,7 @@
               eventElm = eventElm.parent();
             }
 
-            if (!scope.beforeDrag(scope)) {
+            if (!scope.beforeDrag(scope, e)) {
               return;
             }
 
@@ -426,8 +426,8 @@
               dragStarted = false;
               dragStartEvent(e);
               dragTimer = $timeout(function() {
-                dragStartEvent(e);
                 dragDelaying = false;
+                dragStartEvent(e);
               }, scope.dragDelay);
             });
             element.bind('touchend touchcancel mouseup', function() {
