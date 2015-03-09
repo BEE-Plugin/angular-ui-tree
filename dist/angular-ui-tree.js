@@ -396,8 +396,8 @@
         return $scope.$treeScope.$callbacks.accept(sourceNode, $scope, destIndex);
       };
 
-      $scope.beforeDrag = function(sourceNode, event) {
-        return $scope.$treeScope.$callbacks.beforeDrag(sourceNode, event);
+      $scope.beforeDrag = function(sourceNode) {
+        return $scope.$treeScope.$callbacks.beforeDrag(sourceNode);
       };
 
       $scope.isParent = function(node) {
@@ -907,7 +907,7 @@
               eventElm = eventElm.parent();
             }
 
-            if (!scope.beforeDrag(scope, e)) {
+            if (!scope.beforeDrag(scope)) {
               return;
             }
 
