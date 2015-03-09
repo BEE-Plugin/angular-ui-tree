@@ -182,7 +182,7 @@
                 scrollTopBoundTo = $(scope.boundTo).scrollTop();
                 if (scrollTopBoundTo > 100) {
                   $(scope.boundTo).animate({
-                    scrollTop: '-=100'
+                    scrollTop: '-=70'
                   }, 100);
                 }
               }
@@ -201,7 +201,7 @@
                 scrollTopBoundTo = $(scope.boundTo).scrollTop();
 
                 $(scope.boundTo).animate({
-                  scrollTop: '+=100'
+                  scrollTop: '+=70'
                 }, 100);
               }
 
