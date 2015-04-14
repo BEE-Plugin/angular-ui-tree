@@ -981,13 +981,14 @@
 
             document_height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
             document_width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
-          };
-
-          var dragMove = function(e) {
 
             scope.$apply(function() {
               scope.$callbacks.dragStart(dragInfo.eventArgs(elements, pos));
             });
+
+          };
+
+          var dragMove = function(e) {
 
             var eventObj = $uiTreeHelper.eventObj(e);
             var prev, leftElmPos, originLeftElmPos, topElmPos, originTopElmPos;
@@ -1017,7 +1018,7 @@
                 scrollTopBoundTo = $(scope.boundTo).scrollTop();
                 if (scrollTopBoundTo > 100) {
                   $(scope.boundTo).animate({
-                    scrollTop: '-=70'
+                    scrollTop: '-=35'
                   }, 100);
                 }
               }
@@ -1036,7 +1037,7 @@
                 scrollTopBoundTo = $(scope.boundTo).scrollTop();
 
                 $(scope.boundTo).animate({
-                  scrollTop: '+=70'
+                  scrollTop: '+=35'
                 }, 100);
               }
 
@@ -1289,11 +1290,18 @@
           };
           bindDrag();
 
-          angular.element($window.document.body).bind("keydown", function(e) {
+          var keydownHandler = function(e) {
             if (e.keyCode == 27) {
               scope.$$apply = false;
               dragEnd(e);
             }
+          };
+
+          angular.element($window.document.body).bind("keydown", keydownHandler);
+
+          //unbind handler that retains scope
+          scope.$on('$destroy', function() {
+            angular.element($window.document.body).unbind("keydown", keydownHandler);
           });
         }
       };
